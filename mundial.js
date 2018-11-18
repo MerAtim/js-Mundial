@@ -112,7 +112,6 @@ polonia.grupo = H;
 var ordenarFixture = function (a, b) {
 
     return b.puntos - a.puntos || b.df - a.df // || b.gf - a.gf;
-
 }
 
 argentina.grupo.team.sort(ordenarFixture);
@@ -121,14 +120,29 @@ console.log(A);
 
 var sumarPuntos = function (team) {
     team.puntos += 3;
-    team.grupo.sort(ordenarFixture);
+    actualizarTabla();
 }
+
+var actualizarGrupo = function (team) {
+    team.grupo.team.sort(ordenarFixture);
+    actualizarTabla(team.grupo);
+}
+
+var ganar = function (_equipo) {
+    _equipo.puntos += 3;
+    actualizarGrupo(_equipo);
+}
+var empatar = function (_team) {
+    _team.puntos += 1;
+    actualizarGrupo(_team);
+}
+
 
 var cargarGrupo = function (group) {
     var tabla = document.getElementById("tablaMayor");
     var elemento = document.createElement("td");
     var tabla2 = document.createElement("table");
-    var tr = document.createElement("tr")
+    var tr = document.createElement("tr");
     tabla2.id = group.name;
     // CARGO LOS TEXTO BASE (GRUPO PUNTOS GF GC)
     var nPais = document.createElement("td"),
@@ -149,7 +163,6 @@ var cargarGrupo = function (group) {
     tr.appendChild(nPuntos);
     tr.appendChild(nGf);
     tr.appendChild(nGc);
-    // var contenido = document.createTextNode("Este texto se creo con JS");
     tabla2.appendChild(tr);
 
     for (i = 0; i < 4; i++) {
@@ -181,6 +194,59 @@ var cargarGrupo = function (group) {
     elemento.appendChild(tabla2);
     tabla.appendChild(elemento);
 
+}
+
+var actualizarTabla = function (group) {
+    var tabla2 = document.getElementById(group.name);
+    tabla2.innerHTML = "";
+    var tr = document.createElement("tr")
+    var nPais = document.createElement("td"),
+        nPuntos = document.createElement("td"),
+        nGf = document.createElement("td"),
+        nGc = document.createElement("td"),
+        ncPais = document.createTextNode("Grupo " + group.name),
+        ncPuntos = document.createTextNode("Puntos"),
+        ncGf = document.createTextNode("GF"),
+        ncGc = document.createTextNode("GC");
+
+    nPais.appendChild(ncPais);
+    nPuntos.appendChild(ncPuntos);
+    nGf.appendChild(ncGf);
+    nGc.appendChild(ncGc);
+
+    tr.appendChild(nPais);
+    tr.appendChild(nPuntos);
+    tr.appendChild(nGf);
+    tr.appendChild(nGc);
+    tabla2.appendChild(tr);
+
+    for (i = 0; i < 4; i++) {
+        var team = group.team[i];
+        var newTr = document.createElement("tr"),
+            pais = document.createElement("td"),
+            puntos = document.createElement("td"),
+            gf = document.createElement("td"),
+            gc = document.createElement("td"),
+            cPais = document.createTextNode(team.pais),
+            cPuntos = document.createTextNode(team.puntos),
+            cGf = document.createTextNode(team.gf),
+            cGc = document.createTextNode(team.gc);
+
+        pais.appendChild(cPais);
+        puntos.appendChild(cPuntos);
+        gf.appendChild(cGf);
+        gc.appendChild(cGc);
+
+        newTr.appendChild(pais);
+        newTr.appendChild(puntos);
+        newTr.appendChild(gf);
+        newTr.appendChild(gc);
+        tabla2.appendChild(newTr);
+
+    }
+    // var mercedes = document.createElement("div");
+    // tabla2.removeChild();
+    // document.getElementById(group.name).innerHTML = ""
 }
 
 // var columnaTitulo = function () {
