@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+
+
+<!--   
+    Transicion de estilo copado ::      transition:300ms all ease;
+
+ -->
+
+<body>
+    <!-- <script>
+        var nombre = prompt("Ingresa tu nombre.");
+        alert("la concha de tu madre " + nombre + " ");
+        document.writeln(nombre);
+        var nombre = prompt("Ingresa tu nombre.");
+        alert("la concha de tu madre " + nombre + " ");
+        document.writeln(nombre);
+        var nombre = prompt("Ingresa tu nombre.");
+        alert("la concha de tu madre " + nombre + " ");
+        document.writeln(nombre);
+    </script> -->
+    <h1>TITULO</h1>
+
+
+    <script>
+        // Para que no pueda ser accedida por afuera iniciamos el script asi
+        // Es una funcion autoinvocada
+        (function () {
+
+            var elemento = document.createElement("h2");
+            var contenido = document.createTextNode("Este texto se creo con <b>JS</b>");
+            elemento.appendChild(contenido);
+            elemento.setAttribute("align", "center");
+            document.body.appendChild(elemento);
+            // elemento.insertBefore   --->  sirve para insertar antes de un elemento.
+            // innerHTML -----> sirve para obtener lo q dice el html y o cambiarlo.
+
+
+
+        }())
+    </script>
+
+
+</body>
+
+</html>
